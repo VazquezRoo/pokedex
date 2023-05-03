@@ -1,0 +1,26 @@
+.trapecio{
+    
+    width: 100%;
+    height: 0px;
+    border-right: 70px solid transparent;
+    border-left: 0px solid transparent;
+    border-bottom: 35px solid hsl(0, 0%, 97%);
+    position: absolute;
+    margin-top: 46px;
+    top: 0;
+    background-image: url(/public/images/fondo2.jpg);
+    background-size: cover;
+}
+
+.trapecio__dos{
+    
+    width: 100%;
+    height: 0px;
+    border-right: 0px solid transparent;
+    border-left: 70px solid transparent;
+    border-bottom: 35px solid hsl(0, 0%, 97%);
+    position: absolute;
+    margin-top: 46px;
+    top: 0;
+}
+
