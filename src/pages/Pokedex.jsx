@@ -65,8 +65,8 @@ function Pokedex() {
         // setCurrentGeneration()
         // setCurrentType
         
-        const pokeName = e.target.pokemonName.value
-        setCurrentType()
+        const pokeName = e.target.pokemonName.value.toLowerCase()
+  setCurrentType()
         setCurrentGeneration()
         setPokemonName(pokeName)
         
