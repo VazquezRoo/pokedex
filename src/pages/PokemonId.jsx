@@ -137,7 +137,7 @@ function PokemonId() {
         psychic: "bg-pink-400",
         ice: "bg-cyan-600",
         dragon: "bg-violet-800",
-        dark: "bg-stone-800",
+        dark: "bg-stone-600",
         fairy: "bg-pink-400",
         
     }
@@ -301,7 +301,7 @@ function PokemonId() {
 
         <div className=' min-[1100px]:w-[90%] mx-auto  border-t-[1px] border-black/20 flex mt-[20px] flex-col gap-6 items-center bg-white w-[260px] justify-center min-[1100px]:mx-auto'>
             <p className='w-[50%] text-center pt-[10px] min-[1100px]:text-[25px]'>Abilities</p>
-            <div className='grid pb-[20px] w-[70%]  border-black/50 gap-1 min-[1100px]:flex min-[1100px]:text-[20px]'>
+            <div className='grid pb-[20px] w-[70%]  border-black/50 gap-1 min-[1100px]:flex min-[1100px]:text-[20px] min-[1100px]:flex-wrap'>
                
         {
             pokemon?.abilities.map(ability => <div key={ability.ability.name} className={`${ability.is_hidden ? 'bg-purple-200': 'bg-gray-200'} w-[100%]  text-center relative`}>{ability.ability.name} <abbr title={ability.is_hidden ? 'Habilidad oculta':'Habilidad comun'}><i className=' bx bx-question-mark w-[20px] h-[24px] bg-gray-300 absolute right-0 justify-items-center '></i></abbr></div>)
