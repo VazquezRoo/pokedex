@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Header from '../components/pokedex/Header'
+import Header from '../components/Header'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import PokemonCard from '../components/pokedex/PokemonCard'
 import { current } from '@reduxjs/toolkit'
 import FooterPokedex from '../components/pokedex/FooterPokedex'
-import Loader from '../components/pokedex/Loader'
+import Loader from '../components/Loader'
 
 function Pokedex() {
 
     const nameTrainer = useSelector(store=> store.nameTrainer)
-
-
 
     const [pokemons, setPokemons] = useState([])  //Estado para mostrar pokemons
     const [pokemonName, setPokemonName] = useState('')  //Estado para mostra por nombre
@@ -22,6 +20,26 @@ function Pokedex() {
     const [currentOptionPage, setCurrentOptionPage] = useState(1)//Estado para cambiar bloque de pagina
     const [currentGeneration, setCurrentGeneration] = useState()   //Estado para mostrar por generaciones
 
+    const [loader, setLoader] = useState(false)
+
+
+     
+    //handle para tomar el nombre del input
+
+
+    const handleSubmit = (e) =>{
+
+        e.preventDefault()
+        // setCurrentGeneration()
+        // setCurrentType
+        
+        const pokeName = e.target.pokemonName.value.toLowerCase()
+        setCurrentType()
+        setCurrentGeneration()
+        setPokemonName(pokeName)      
+        
+    }
+
 
 
 
@@ -29,12 +47,9 @@ function Pokedex() {
 
     useEffect(()=>{
         setCurrentPage(1)
-        // setPage(0)
         setCurrentOptionPage(1)
-        // setCurrentType('')
-        
-        
-    },[pokemonName,currentType])
+              
+    },[pokemonName,currentType,currentGeneration])
     
 
     // Efecto para traer los tipos 
@@ -52,27 +67,11 @@ function Pokedex() {
             setTypes(newTypes)
         })
 
-        .catch(err=> console.log(err))
+        .catch(err=> console.log(err))        
 
     },[])
 
-    //handle para tomar el nombre del input
-
-
-    const handleSubmit = (e) =>{
-
-        e.preventDefault()
-        // setCurrentGeneration()
-        // setCurrentType
-        
-        const pokeName = e.target.pokemonName.value.toLowerCase()
-  setCurrentType()
-        setCurrentGeneration()
-        setPokemonName(pokeName)
-        
-        
-    }
-
+   
    
 
         //Efecto 1 -- tomar los pokemones del api
@@ -80,7 +79,9 @@ function Pokedex() {
     useEffect(()=>{
        
 
-        if(!currentType && !currentGeneration){
+        if(!currentType && !currentGeneration){ 
+
+            // setLoader(true)             //Activa el loader
           
             inputType.current.value = ''
 
@@ -89,13 +90,9 @@ function Pokedex() {
         get(URL)
         .then(res=> setPokemons(res.data.results))
         .catch(err=> console.log(err))
-        console.log('current pokemon')
-        }
-        else if(currentType === 'hi'){
-            console.log('hi')
-        }
+        // .finally(()=>setLoader(false))  //Desactiva el Loader
 
-
+        }
     },[pokemonName,currentType])   //Efecto al tomar nombre del input, al poner el type en all
 
 
@@ -105,9 +102,11 @@ function Pokedex() {
         useEffect(()=>{
             
             if(currentType ){
-                setPokemonName('')
-                setCurrentGeneration()
-                inputName.current.value = ''
+                // setLoader(true)         //Activa el Loader
+                setPokemonName('')      //Reset a pokemonName
+                setCurrentGeneration()  //Reset a currentGeneration
+
+                inputName.current.value = ''    //Reset al valor que se muestra en input
                 
                 const URL = `https://pokeapi.co/api/v2/type/${currentType}`
                 axios
@@ -117,8 +116,9 @@ function Pokedex() {
                     setPokemons(pokemonByType)
                 })
                 .catch(err=>console.log(err))
+                // .finally(()=>setLoader(false))         //Desactiva el Loader
                
-                console.log('currente type')
+                console.log(pokemons)
             }
 
             
@@ -131,9 +131,12 @@ function Pokedex() {
         useEffect(()=>{
             
             if(currentGeneration ){
-                setPokemonName('')  
-                inputType.current.value = ''
-                inputName.current.value = ''
+
+                // setLoader(true)         //Activa el Loader
+
+                setPokemonName('')                  //Reset al valor de pokemonName
+                inputType.current.value = ''        //Reset al valor que se muestra en Type
+                inputName.current.value = ''        //Reset al valor que se muestra en input
                 const URL = `https://pokeapi.co/api/v2/pokedex/${currentGeneration}`
                 axios
                 .get(URL)
@@ -149,7 +152,8 @@ function Pokedex() {
                 )
                                
                 .catch(err=>console.log(err))
-                console.log('currente generation')
+                // .finally(()=>setLoader(false))      //Desactivo Loader
+                console.log(pokemons)
             }
 
         },[currentGeneration]) //efecto al cambiar la generacion
@@ -228,72 +232,120 @@ function Pokedex() {
     //     inputType.current.value = ''
     // },[currentGeneration])
 
-
-    // ref={inputName}
-
-    // 
-    // ref={inputName}
-
   return (
-    
+      
     <section className='relative min-w-screen bg-[url("/images/fondo2.jpg")] border-2 border-black'>
+        
+        {/* Loader */}
+
+        {
+            loader? <Loader/>:<div></div>
+        }
+
+        {/* Header */}
+
         <Header/>
 
         {/* seccion de filtros y saludos */}
+
         <section className='grid py-6 '>
+
+            {/* Saludo */}
+
             <div className='grid justify-center text-center min-[1100px]:text-[30px] min-[600px]:text-[20px]'>
             <h3>Welcome <span className='text-red-600'>{nameLogin}</span>, here you can find your favorite pokemon</h3>
             </div>
            
 
-            <form onSubmit={handleSubmit} action="" className=' justify-self-center'>
+            {/* Form para Input,button y type search */}
 
-                <div className='flex flex-col min-[700px]:flex-row min-[700px]:gap-[80px] justify-between p-6 gap-4'>
+            <form onSubmit={handleSubmit} action="" className=' justify-self-center flex flex-col min-[700px]:flex-row min-[700px]:gap-[80px] justify-between p-6 gap-4'>
+
+
+                    {/* Input y button */}
+
                 <div className='flex relative w-[260px] ml-[-20px]'>
-                <input ref={inputName}  id='pokemonName' placeholder='Search your pokemon' className=' border-[1px] border-black border-r-0 w-[260px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px] '/>
-                <button  className='flex w-[50px] border-[1px] border-l-0 border-black  bg-red-600 right-0'><i className='bx bx-search-alt text-[25px] text-white mx-auto'></i></button>
+                    <input ref={inputName}  id='pokemonName' placeholder='Search your pokemon' className=' border-[1px] border-black border-r-0 w-[260px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px] '/>
+
+                    <button  className='flex w-[50px] border-[1px] border-l-0 border-black  bg-red-600 right-0'><i className='bx bx-search-alt text-[25px] text-white mx-auto'></i></button>
                 </div>
+
+                    {/* Select */}
                 
                 <select  ref={inputType}  className='flex border-[1px] border-black drop-shadow-lg relative w-[260px] ml-[-20px] h-[30px]' onChange={(e)=> setCurrentType(e.target.value)}>
                 
-                <option  value="">All</option>
-                {
-                    types.map(type=>(
-                        <option value={type} key={type}>{type}</option>
-                    ))
-                }
+                    <option  value="">All</option>
+                    {
+                        types.map(type=>(
+                            <option value={type} key={type}>{type}</option>
+                        ))
+                    }
                 </select>
-                </div>
-
-                                   
+                               
             </form>
+
+            {/* seccion buscar por generaciones */}
 
             <section className='grid justify-items-center gap-2 '>
 
-                <h2><li onClick={()=>changeGeneration(1)} className={`cursor-pointer ${currentGeneration === 1 ? 'opacity-100': 'opacity-40'} h-[20px] w-[200px] bg-blue-200 text-[11px] text- rounded-md flex justify-center items-center`}>Todas las generaciones</li></h2>
+                <h2>
+                    <li onClick={()=>changeGeneration(1)} className={`cursor-pointer ${currentGeneration === 1 ? 'opacity-100': 'opacity-40'} h-[20px] w-[200px] bg-blue-200 text-[11px] text- rounded-md flex justify-center items-center`}>
+                        Todas las generaciones
+                    </li>
+                </h2>
+
+                {/* Lista de generaciones */}
 
                 <ul className='flex flex-wrap gap-2 justify-center'>
-                    <li onClick={()=>changeGeneration(2)} className={` cursor-pointer ${currentGeneration === 2 ? 'opacity-100': 'opacity-40'} h-[20px] w-[90px] bg-blue-200 text-[11px] text- rounded-md flex justify-center items-center`}>I Generation</li>
-                    <li onClick={()=>changeGeneration(3)} className={`cursor-pointer  h-[20px] w-[90px] bg-green-200 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 3 ? 'opacity-100': 'opacity-40'}`}>II Generation</li>
-                    <li onClick={()=>changeGeneration(4)} className={`cursor-pointer  h-[20px] w-[90px] bg-red-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 4 ? 'opacity-100': 'opacity-40'}`}>III Generation</li>
-                    <li onClick={()=>changeGeneration(5)} className={`cursor-pointer h-[20px] w-[90px] bg-orange-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 5 ? 'opacity-100': 'opacity-40'}`}>IV Generation</li>
-                    <li onClick={()=>changeGeneration(8)} className={`cursor-pointer h-[20px] w-[90px] bg-gray-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 8 ? 'opacity-100': 'opacity-40'}`}>V Generation</li>
-                    <li onClick={()=>changeGeneration(12)} className={`cursor-pointer h-[20px] w-[90px] bg-yellow-400 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 12 ? 'opacity-100': 'opacity-40'}`}>VI Generation</li>
-                    <li onClick={()=>changeGeneration(16)} className={`cursor-pointer h-[20px] w-[90px] bg-violet-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 16 ? 'opacity-100': 'opacity-40'}`}>VII Generation</li>
+                    <li onClick={()=>changeGeneration(2)} className={` cursor-pointer ${currentGeneration === 2 ? 'opacity-100': 'opacity-40'} h-[20px] w-[90px] bg-blue-200 text-[11px] text- rounded-md flex justify-center items-center`}>
+                        I Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(3)} className={`cursor-pointer  h-[20px] w-[90px] bg-green-200 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 3 ? 'opacity-100': 'opacity-40'}`}>
+                        II Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(4)} className={`cursor-pointer  h-[20px] w-[90px] bg-red-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 4 ? 'opacity-100': 'opacity-40'}`}>
+                        III Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(5)} className={`cursor-pointer h-[20px] w-[90px] bg-orange-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 5 ? 'opacity-100': 'opacity-40'}`}>
+                        IV Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(8)} className={`cursor-pointer h-[20px] w-[90px] bg-gray-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 8 ? 'opacity-100': 'opacity-40'}`}>
+                        V Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(12)} className={`cursor-pointer h-[20px] w-[90px] bg-yellow-400 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 12 ? 'opacity-100': 'opacity-40'}`}>
+                        VI Generation
+                    </li>
+
+                    <li onClick={()=>changeGeneration(16)} className={`cursor-pointer h-[20px] w-[90px] bg-violet-300 text-[11px] text- rounded-md flex justify-center items-center ${currentGeneration === 16 ? 'opacity-100': 'opacity-40'}`}>
+                        VII Generation
+                    </li>
                  
-                </ul>
-                
+                </ul>              
             </section>
+
         </section>
 
-       
+       {/* Seccion de pokemonsCard */}
        
         <section className='px-2 grid  gap-6  grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] min-[1280px]:grid-cols-4 min-[1600px]:grid-cols-5   justify-items-center'>
 
-            {pokemonsByName?.slice(startCut, endCut).map(pokemon=><PokemonCard key={pokemon.url} pokemonURL = {pokemon.url}/> )}
+            {
+            pokemonsByName?.slice(startCut, endCut).map(pokemon=>
+            <PokemonCard key={pokemon.url} pokemonURL = {pokemon.url} />
+             )
+            }
+            
         </section>
+
+        {/* seccion de la paginacion */}
        
          <ul className='flex justify-center items-center gap-4 mt-[50px] '>
+
             {
                 currentOptionPage > 1 ? <button onClick={()=> setCurrentOptionPage(currentOptionPage - 1)} className='flex justify-center'><i className='bx bx-caret-left text-[30px] text-red-600'></i></button>:
                 <button  className='flex justify-center'><i className='bx bx-caret-left text-[30px] cursor-auto opacity-0'></i></button>
@@ -311,13 +363,9 @@ function Pokedex() {
         </ul> 
 
             <FooterPokedex/>
-
-            <ul>
-
-            </ul>
-       
+            
     </section>
-    
+       
   )
 }
 

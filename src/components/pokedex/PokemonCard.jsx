@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 function PokemonCard({pokemonURL}) {
 
+
     const borderByType = {
         normal: "border-neutral-600",
         fighting: "border-amber-700",
@@ -46,6 +47,8 @@ function PokemonCard({pokemonURL}) {
         dark: "bg-gradient-to-b from-stone-700 to-black",
         fairy: "bg-gradient-to-b from-pink-300 to-black",
     }
+
+    //arreglo para cada tipo de pokemon
 
      const typeBackGround = {
         normal: "bg-neutral-500",
@@ -90,12 +93,14 @@ function PokemonCard({pokemonURL}) {
         fairy: "text-pink-400",
     }
 
-    const [pokemon, setPokemon] = useState()
+
+    const [pokemon, setPokemon] = useState() //Estado para cambiar pokemon a mostrar
    
 
-    const types = pokemon?.types.slice(0,2).map(type=> type.type.name)
+    // Efecto 1 -- trar informacion del pokemon
 
     useEffect(()=>{ 
+
         const newURL = pokemonURL.replace('-species','')
         axios.get(newURL)
         .then(res=> setPokemon(res.data))
@@ -105,70 +110,93 @@ function PokemonCard({pokemonURL}) {
             )
     },[])
 
+    
+    //Logica para tomar solo dos tipos
+
+    const types = pokemon?.types.slice(0,2).map(type=> type.type.name) 
+
+
+    //Mayuscula primera letra3
+
     const  pokemonName = pokemon?.name[0].toUpperCase() + pokemon?.name.substring(1)
 
+
+    //volver no. pokedes 0001
 
     const numberPokedex =  pokemon?.id.toString().padStart(4,'0')
 
 
-    const [opacity, setOpacity] = useState(false)
+    // const [opacity, setOpacity] = useState(false)
 
    
 
   return (
+
     <Link id='padreImgPokemon' to= {`/pokedex/${pokemon?.id}`} className={`text-center border-8  ${borderByType[pokemon?.types[0].type.name]} ${backgroundByType[pokemon?.types[0].type.name]} rounded-[80px] w-[280px] bg-slate-800/90 ${numberPokedex > 1010 && 'opacity-100 invisible absolute'} hover:opacity-80`}>
+
         {/* seccion superior */}
 
         <section className='relative h-[150px] grid'>
 
-            {/* <div className={`absolute ${backgroundByType[pokemon?.types[0].type.name]}  -bottom-12 left-1/2 -translate-x-1/2 h-[100px] w-[100px]`}>
-            </div> */}
-        
-        <h3 className=' mt-2 text-[25px] w-[260px]'>{pokemonName}</h3>
-        <p className='absolute mt-[35px] ml-[100px] text-black/50'>N.° {numberPokedex}</p>
-        {/* <button className=' justify-self-end'>cambio</button> */}
-            
-        <img id='imgPokemon'  src={pokemon?.sprites.other["official-artwork"].front_default} alt=""  className={`h-[180px]  ml-[50px] absolute mt-[55px] hover:h-[200px] hover:ml-[40px] hover:mt-[45px] transition-[2000] z-30`}/>
-        <div className={`absolute w-[265px] h-[400px] bg-black rounded-[70px] ${opacity ? 'opacity-50' : 'opacity-0' }`}></div>
-        
-            
+     
+             <h3 className=' mt-2 text-[25px] w-[260px]'>{pokemonName}</h3>
 
+             <p className='absolute mt-[35px] ml-[100px] text-black/50'>N.° {numberPokedex}</p>
             
+            {/* imagen card */}
 
+            <img id='imgPokemon'  src={pokemon?.sprites.other["official-artwork"].front_default} alt=""  className={`h-[180px]  ml-[50px] absolute mt-[55px] hover:h-[200px] hover:ml-[40px] hover:mt-[45px] transition-[2000] z-30`}/>
+
+            {/* fondo opaco */}
+
+             {/* <div className={`absolute w-[265px] h-[400px] bg-black rounded-[70px] ${opacity ? 'opacity-50' : 'opacity-0' }`}></div> */}
+        
         </section>
+
         {/* seccion inferior */}
         <section className='bg-white h-[250px] grid align-bottom rounded-b-[70px]'>
 
             <div className='grid justify-center pt-2'>
             
+
+            {/* tipo */}
             <div className='flex w-[150px]  pt-[70px]'>
+
             {
                 types?.map((type)=> 
-                <div key={type} className='mx-auto'>
-                    {         
-                    types.length === 1 ?        
-                    <div className={`${typeBackGround[type]} w-[80px] mx-auto rounded-xl`}>
-                    <h4 >{type[0].toUpperCase() + type.substring(1)}</h4>
-                    </div>:
-                    <div className={`${typeBackGround[type]} w-[80px] mx-auto ${types[0] === type ?'rounded-l-xl': 'rounded-r-xl'}`}>
-                    <h4 >{type[0].toUpperCase() + type.substring(1)}</h4>
-                    </div>
-                    }
+                    <div key={type} className='mx-auto'>
+                        {         
+                        types.length === 1 ?        
+                            <div className={`${typeBackGround[type]} w-[80px] mx-auto rounded-xl`}>
+
+                                <h4 >{type[0].toUpperCase() + type.substring(1)}</h4>
+
+                            </div>:
+
+                            <div className={`${typeBackGround[type]} w-[80px] mx-auto ${types[0] === type ?'rounded-l-xl': 'rounded-r-xl'}`}>
+
+                                <h4 >{type[0].toUpperCase() + type.substring(1)}</h4>
+
+                            </div>
+                        }
                     </div>
                   )
             }
             </div>
               
-            <hr/>
             </div>
 
+            {/* stats */}
 
             <section className='grid grid-cols-2 gap-2 p-2 text-[13px]'>
                 {
                     pokemon?.stats.map((stat)=>(
                         <div key={stat.stat.name}>
+                            
                             <h5>{stat.stat.name[0].toUpperCase() + stat.stat.name.substring(1)}</h5>
+
                             <span><b className={`${text[[pokemon?.types[0].type.name]]}`} >{stat.base_stat}</b></span>
+                            
                         </div>
                     ))
                 }
