@@ -122,7 +122,7 @@ function Evolution({evolution, next, previous}) {
       </div>
   
       </section>:
-      <div>Este pokemon no evoluciona</div>
+      <div>This Pokémon does not evolve</div>
     }
     
    
