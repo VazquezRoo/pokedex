@@ -473,11 +473,11 @@ function PokemonId() {
    
 
 
-            <div className={`w-[90%] grid min-[1000px]:w-[600px] min-[1000px]:h-[300px] min-[750px]:w-[500px] justify-center border-t-[1px] border-black/30 pt-[10px] ${text[typePodemon]}`}>
+            <div className={`w-[90%] grid  min-[1000px]:h-[300px] min-[750px]:w-[500px] justify-center border-t-[1px] border-black/30 pt-[10px] ${text[typePodemon]}`}>
 
-            {/* <div>
+            <div>
                 <h3 className='text-center'>Evolution chain</h3>
-                </div> */}
+                </div>
 
                 <Evolution evolution={evolution} next={next} previous={previous} id={id}/>
 
