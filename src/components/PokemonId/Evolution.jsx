@@ -68,19 +68,19 @@ function Evolution({evolution, next, previous}) {
       
     
         <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={`pt-3`}/>     
-       <p className='text-center min-[600px]:text-[20px]'>{evolutionPoke?.name}</p>
+       <p className='text-center min-[600px]:text-[20px] self-end'>{evolutionPoke?.name}</p>
 
     </div>
 
 
     <div className={`flex items-center w-[100%]   justify-center text-[10px] ${evolutionDos.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
 
-    <p className='text-[20px] pl-2 text-white'>{'>'}</p>
+    <p className='text-[20px] pl-2 text-black'>{'>'}</p>
 
 
       <div className='grid justify-center items-center'>
        <ImgPokeEvolution url={urlDos} next={next} previous={previous}/>
-       <p className=' text-center min-[600px]:text-[20px] '>{evolutionDos?.name}</p>
+       <p className=' text-center min-[600px]:text-[20px] self-end '>{evolutionDos?.name}</p>
 
        </div>
 
@@ -88,12 +88,12 @@ function Evolution({evolution, next, previous}) {
 
     <div className={`flex items-center  w-[100%]  justify-center text-[10px] ${evolutionTres.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
 
-    <p className='text-[20px] pl-2  text-white'>{'>'}</p>
+    <p className='text-[20px] pl-2  text-black'>{'>'}</p>
 
       <div className='grid justify-center items-center'>
         
        <ImgPokeEvolution url={urlTres} next={next} previous={previous} className='items-center justify-center self-center justify-self-center' />
-       <p className='text-center min-[600px]:text-[20px] text-red '>{evolutionTres?.name}</p>
+       <p className='text-center min-[600px]:text-[20px] self-end '>{evolutionTres?.name}</p>
 
        </div>
 
