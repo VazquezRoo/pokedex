@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ImgPokeEvolution from './ImgPokeEvolution'
+import { Link } from 'react-router-dom'
 
 function Evolution({evolution, next, previous}) {
 
@@ -8,8 +9,6 @@ function Evolution({evolution, next, previous}) {
   const [evolutionPoke, setEvolutionPoke] = useState([])
   const [evolutionDos, setEvolutionDos] = useState([])
   const [evolutionTres, setEvolutionTres] = useState([])
-  // const [currentPoke, setCurrentPoke] = useState()
-
 
   console.log(evolution)
 
@@ -23,65 +22,81 @@ function Evolution({evolution, next, previous}) {
 
           const evolutionData = res.data.chain
           console.log(evolutionData)
+
           const evolutionDataDos = res.data.chain.evolves_to[0]
           console.log(evolutionDataDos)
+
           const evolutionDataTres = res.data.chain.evolves_to[0].evolves_to
           console.log(evolutionDataTres)
 
           
           setEvolutionPoke(evolutionData['species'])
           console.log(evolutionPoke)
+
           setEvolutionDos(evolutionDataDos['species'])
           console.log(evolutionDos)
-          if(evolutionDataTres === []){
-            setEvolutionTres()
+
+          if(!evolutionDataTres.length){
+            setEvolutionTres([])
           }
           else {
             setEvolutionTres(evolutionDataTres[0]['species'])
+
           }
           console.log(evolutionTres)
-          
-          
-          // setEvolutionDos(evolutionData['evolves_to'])x
-
-          // console.log(evolutionPoke)
           })
+
         .catch(err=> console.log(err))
-      // console.log(evolutionPoke)
       
     },[evolution,next,previous])
 
     const url = (evolutionPoke?.url)
     console.log(url)
-    // const urlDos = (evolutionPoke?.url)
 
     const urlDos = (evolutionDos?.url)
     console.log(urlDos)
 
 
-      const urlTres = (evolutionTres?.url)
+    const urlTres = (evolutionTres?.url)
+    console.log(urlTres)
    
    
-
-    // const urlDos = url.replace('-species','')
-    // console.log(url)
-
   return (
-    <section className='flex items-center justify-center gap-6 w-[90%] '>
+    <section className='flex  w-[100%] '>
 
-    <div className='grid justify-center text-[10px]'>
-       {/* <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}/> */}
-       {evolutionPoke?.name}
+    <div className='grid justify-center items-center w-[75%] justify-items-center  text-[10px] '>
+      
+    
+        <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={`pt-3`}/>     
+       <p className='text-center min-[600px]:text-[20px]'>{evolutionPoke?.name}</p>
+
     </div>
 
 
-    <div className={`grid justify-center text-[10px] ${evolutionDos.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
-       {/* <ImgPokeEvolution url={urlDos} next={next} previous={previous}/> */}
-       {evolutionDos?.name}
+    <div className={`flex items-center w-[100%]   justify-center text-[10px] ${evolutionDos.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
+
+    <p className='text-[20px] pl-2 text-white'>{'>'}</p>
+
+
+      <div className='grid justify-center items-center'>
+       <ImgPokeEvolution url={urlDos} next={next} previous={previous}/>
+       <p className=' text-center min-[600px]:text-[20px] '>{evolutionDos?.name}</p>
+
+       </div>
+
     </div>
-    <div className={`grid justify-center text-[10px] ${evolutionTres.name !== undefined ? 'opacity-100': 'opacity-0 absolute invisible'}`}>
-       {/* <ImgPokeEvolution url={urlTres} next={next} previous={previous}/> */}
-      {evolutionTres?.name}
+
+    <div className={`flex items-center  w-[100%]  justify-center text-[10px] ${evolutionTres.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
+
+    <p className='text-[20px] pl-2  text-white'>{'>'}</p>
+
+      <div className='grid justify-center items-center'>
+        
+       <ImgPokeEvolution url={urlTres} next={next} previous={previous} className='items-center justify-center self-center justify-self-center' />
+       <p className='text-center min-[600px]:text-[20px] text-red '>{evolutionTres?.name}</p>
+
+       </div>
+
     </div>
 
     </section>

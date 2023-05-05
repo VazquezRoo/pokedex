@@ -81,7 +81,7 @@ function Pokedex() {
 
         if(!currentType && !currentGeneration){ 
 
-            // setLoader(true)             //Activa el loader
+            setLoader(true)             //Activa el loader
           
             inputType.current.value = ''
 
@@ -90,7 +90,7 @@ function Pokedex() {
         get(URL)
         .then(res=> setPokemons(res.data.results))
         .catch(err=> console.log(err))
-        // .finally(()=>setLoader(false))  //Desactiva el Loader
+        .finally(()=>setLoader(false))  //Desactiva el Loader
 
         }
     },[pokemonName,currentType])   //Efecto al tomar nombre del input, al poner el type en all
@@ -102,7 +102,7 @@ function Pokedex() {
         useEffect(()=>{
             
             if(currentType ){
-                // setLoader(true)         //Activa el Loader
+                setLoader(true)         //Activa el Loader
                 setPokemonName('')      //Reset a pokemonName
                 setCurrentGeneration()  //Reset a currentGeneration
 
@@ -116,7 +116,7 @@ function Pokedex() {
                     setPokemons(pokemonByType)
                 })
                 .catch(err=>console.log(err))
-                // .finally(()=>setLoader(false))         //Desactiva el Loader
+                .finally(()=>setLoader(false))         //Desactiva el Loader
                
                 console.log(pokemons)
             }
@@ -132,7 +132,7 @@ function Pokedex() {
             
             if(currentGeneration ){
 
-                // setLoader(true)         //Activa el Loader
+                setLoader(true)         //Activa el Loader
 
                 setPokemonName('')                  //Reset al valor de pokemonName
                 inputType.current.value = ''        //Reset al valor que se muestra en Type
@@ -152,7 +152,7 @@ function Pokedex() {
                 )
                                
                 .catch(err=>console.log(err))
-                // .finally(()=>setLoader(false))      //Desactivo Loader
+                .finally(()=>setLoader(false))      //Desactivo Loader
                 console.log(pokemons)
             }
 
@@ -233,15 +233,17 @@ function Pokedex() {
     // },[currentGeneration])
 
   return (
-      
-    <section className='relative min-w-screen bg-[url("/images/fondo2.jpg")] border-2 border-black'>
-        
-        {/* Loader */}
-
-        {
-            loader? <Loader/>:<div></div>
+      <>
+      {/* Loader */}
+       {
+            loader && <Loader/>
         }
 
+    <section className='relative min-w-screen bg-[url("/images/fondo2.jpg")] border-2 border-black'>
+        
+        
+
+       
         {/* Header */}
 
         <Header/>
@@ -365,6 +367,7 @@ function Pokedex() {
             <FooterPokedex/>
             
     </section>
+    </>
        
   )
 }

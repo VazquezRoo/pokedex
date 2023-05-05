@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import './trapecio.css'
 import Attacks from '../components/PokemonId/Attacks'
@@ -33,18 +33,27 @@ function PokemonId() {
        
     },[])
    
+    const navigate = useNavigate()
     //Efecto 2-- obtener id, tipo, nombre, img
 
     useEffect(()=>{
-
+        if(Number.isNaN(Number(id))|| id > 1010 || id <= 0)  {
+            navigate('/*')
+        }      
+        else{
+        
         const URL = `https://pokeapi.co/api/v2/pokemon/${id}/`
         axios
         .get(URL)
         .then(res => setPokemon(res.data))
-        .catch(err => console.log(err))
-        
+        .catch(err => {
+            console.log(err)
+            
+        })
+    }
+    
 
-    },[next,previous])
+    },[next,previous,navigate])
 
     //Efecto 3-- obtener descripcion, evolucion
 
@@ -146,6 +155,26 @@ function PokemonId() {
         
     }
 
+    const text ={
+        normal: "text-neutral-500",
+        fighting: "text-amber-700",
+        flying: "text-blue-400",
+        poison: "text-violet-500",
+        ground: "text-yellow-600",
+        rock: "text-yellow-800",
+        bug: "text-lime-600",
+        ghost: "text-purple-800",
+        steel: "text-zinc-600",
+        fire: "text-orange-600",
+        water: "text-blue-500",
+        grass: "text-green-600",
+        electric: "text-yellow-400",
+        psychic: "text-pink-400",
+        ice: "text-cyan-600",
+        dragon: "text-violet-800",
+        dark: "text-stone-800",
+        fairy: "text-pink-400",
+      }
     //Images del pokemon normla/shinny
 
     const shinyImage = {
@@ -193,7 +222,9 @@ function PokemonId() {
         return `${percentBarProgres}%`
     }
 
+    const typePodemon = pokemon?.types[0].type.name
 
+    console.log(text[typePodemon])
 
   return (
     
@@ -440,9 +471,9 @@ function PokemonId() {
             </div>
 
 
-            <div className=' w-[90%] min-[750px]:w-[500px] bg-black/50 min-[1000px]:w-[260px]'>
+            <div className={`w-[90%] grid min-[1000px]:w-[600px] min-[1000px]:h-[200px] min-[750px]:w-[500px] bg-black/80 justify-center min-[1000px]:gap-20 ${text[typePodemon]}`}>
 
-                {/* <Evolution evolution={evolution} next={next} previous={previous}/> */}
+                <Evolution evolution={evolution} next={next} previous={previous} id={id}/>
 
             </div>
 

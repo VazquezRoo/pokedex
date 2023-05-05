@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import LoaderCard from './LoaderCard'
 
 function PokemonCard({pokemonURL}) {
 
@@ -95,16 +96,18 @@ function PokemonCard({pokemonURL}) {
 
 
     const [pokemon, setPokemon] = useState() //Estado para cambiar pokemon a mostrar
+    const [loader, setLoader] = useState(false)
    
 
     // Efecto 1 -- trar informacion del pokemon
 
     useEffect(()=>{ 
-
+        setLoader(true)
         const newURL = pokemonURL.replace('-species','')
         axios.get(newURL)
         .then(res=> setPokemon(res.data))
         .catch(err=> console.log(err))
+        .finally(()=>setLoader(false)) 
         
         console.log(pokemon
             )
@@ -131,6 +134,10 @@ function PokemonCard({pokemonURL}) {
    
 
   return (
+    <>
+        {
+            loader && <LoaderCard/>
+        }
 
     <Link id='padreImgPokemon' to= {`/pokedex/${pokemon?.id}`} className={`text-center border-8  ${borderByType[pokemon?.types[0].type.name]} ${backgroundByType[pokemon?.types[0].type.name]} rounded-[80px] w-[280px] bg-slate-800/90 ${numberPokedex > 1010 && 'opacity-100 invisible absolute'} hover:opacity-80`}>
 
@@ -204,6 +211,8 @@ function PokemonCard({pokemonURL}) {
 
         </section>
     </Link>
+
+    </>
   )
 }
 
