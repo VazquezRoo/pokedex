@@ -88,7 +88,7 @@ function Evolution({evolution, next, previous}) {
          <div className='grid  justify-center items-center justify-items-center'>
 
             <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={``}/>     
-            <p className='text-center text-[15px] min-[600px]:text-[20px] self-end'>{evolutionPoke?.name}</p>
+            <p className='text-center text-[15px] min-[600px]:text-[20px] self-end'>{evolutionPoke?.name[0].toUpperCase() + (evolutionPoke?.name).substring(1)}</p>
 
          </div>
   
@@ -102,7 +102,7 @@ function Evolution({evolution, next, previous}) {
   
         <div className='grid  justify-center items-center justify-items-center'>
             <ImgPokeEvolution url={urlDos} next={next} previous={previous}/>
-            <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionDos?.name}</p>
+            <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionDos?.name[0].toUpperCase() + (evolutionDos?.name).substring(1)}</p>
   
          </div>
   
@@ -115,7 +115,7 @@ function Evolution({evolution, next, previous}) {
           <div className='grid  justify-center items-center'>
                 
               <ImgPokeEvolution url={urlTres} next={next} previous={previous} className='items-center justify-center self-center justify-self-center' />
-              <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionTres?.name}</p>
+              <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionTres?.name[0].toUpperCase() + (evolutionTres?.name).substring(1)}</p>
         
           </div>
   

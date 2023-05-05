@@ -277,7 +277,7 @@ function PokemonId() {
                 <button  className='h-[80px] flex  w-[100%] bg-gray-500 items-center justify-between pr-2 pl-3'>
                 
                     {/* info pokemon y pokedex siguiente */}
-                    <p className='text-[12px] min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6 min-[800px]:pb-6'>{pokedexList[(pokemon?.id +1).toString()]} <span className='text-black/40 grid pt-3 z-30 min-[800px]:pt-[0] '>N.°{numberNextPokedex}</span>
+                    <p className='text-[12px] min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6 min-[800px]:pb-6'>{pokedexList[(pokemon?.id +1).toString()][0].toUpperCase() + pokedexList[(pokemon?.id +1).toString()].substring(1)} <span className='text-black/40 grid pt-3 z-30 min-[800px]:pt-[0] '>N.°{numberNextPokedex}</span>
                     </p>
 
                     {/* flecha boton siguiente */}
