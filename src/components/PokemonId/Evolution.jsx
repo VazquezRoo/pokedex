@@ -67,33 +67,33 @@ function Evolution({evolution, next, previous}) {
     <div className='grid justify-center items-center w-[75%] justify-items-center  text-[10px] '>
       
     
-        <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={`pt-3`}/>     
+        <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={``}/>     
        <p className='text-center min-[600px]:text-[20px] self-end'>{evolutionPoke?.name}</p>
 
     </div>
 
 
-    <div className={`flex items-center w-[100%]   justify-center text-[10px] ${evolutionDos.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
+    <div className={`flex items-center justify-center text-[10px] ${evolutionDos.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
 
-    <p className='text-[20px] pl-2 text-black'>{'>'}</p>
+       <p className=' text-[15px] min-[600px]:text-[20px] pl-2 text-black'>{'>'}</p>
 
 
-      <div className='grid justify-center items-center'>
+      <div className='grid  justify-center items-center justify-items-center'>
        <ImgPokeEvolution url={urlDos} next={next} previous={previous}/>
-       <p className=' text-center min-[600px]:text-[20px] self-end '>{evolutionDos?.name}</p>
+       <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionDos?.name}</p>
 
        </div>
 
     </div>
 
-    <div className={`flex items-center  w-[100%]  justify-center text-[10px] ${evolutionTres.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
+    <div className={`flex items-center   justify-center text-[10px] ${evolutionTres.name? 'opacity-100': 'opacity-0 absolute invisible'}`}>
 
     <p className='text-[20px] pl-2  text-black'>{'>'}</p>
 
-      <div className='grid justify-center items-center'>
+      <div className='grid  justify-center items-center'>
         
        <ImgPokeEvolution url={urlTres} next={next} previous={previous} className='items-center justify-center self-center justify-self-center' />
-       <p className='text-center min-[600px]:text-[20px] self-end '>{evolutionTres?.name}</p>
+       <p className=' text-[15px] text-center min-[600px]:text-[20px] self-end '>{evolutionTres?.name}</p>
 
        </div>
 
