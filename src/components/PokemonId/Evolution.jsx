@@ -17,6 +17,7 @@ function Evolution({evolution, next, previous}) {
 
       setEvolutionI(false)
 
+        if(evolution){
         const URL = evolution
       
         axios
@@ -62,7 +63,7 @@ function Evolution({evolution, next, previous}) {
           })
 
         .catch(err=> console.log(err))
-      
+        }
     },[evolution,next,previous])
 
     const url = (evolutionPoke?.url)
@@ -87,7 +88,7 @@ function Evolution({evolution, next, previous}) {
 
          <div className='grid  justify-center items-center justify-items-center'>
 
-            <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={``}/>     
+            <ImgPokeEvolution url={url} next={next} previous={previous} evolution={evolution}  className={` hover:w-[110%]`}/>     
             <p className='text-center text-[15px] min-[600px]:text-[20px] self-end'>{evolutionPoke?.name[0].toUpperCase() + (evolutionPoke?.name).substring(1)}</p>
 
          </div>
