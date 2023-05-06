@@ -292,7 +292,7 @@ function Pokedex() {
 
                 <h2>
                     <li onClick={()=>changeGeneration(1)} className={`cursor-pointer ${currentGeneration === 1 ? 'opacity-100': 'opacity-40'} h-[20px] w-[200px] bg-blue-200 text-[11px] text- rounded-md flex justify-center items-center`}>
-                        Todas las generaciones
+                        All generations
                     </li>
                 </h2>
 

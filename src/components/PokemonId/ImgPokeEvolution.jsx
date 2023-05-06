@@ -33,7 +33,7 @@ const [id, setId] = useState()
 
   return (
     <Link to={`/pokedex/${id}`} className=' min-[1000px]:w-134px min-[1000px]:h-134px cursor-pointer'>
-        <img src={img?.front_default} alt="" className=' min-[1000px]:w-[134px] min-[1000px]:h-[134px]'/>
+        <img src={img?.front_default} alt="" className=' min-[1000px]:w-[134px] min-[1000px]:h-[134px] min-[1000px]:hover:h-[140px]'/>
     </Link>
   )
 }
