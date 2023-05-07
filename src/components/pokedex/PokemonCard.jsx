@@ -109,8 +109,7 @@ function PokemonCard({pokemonURL}) {
         .catch(err=> console.log(err))
         .finally(()=>setLoader(false)) 
         
-        console.log(pokemon
-            )
+        
     },[])
 
     
@@ -171,7 +170,7 @@ function PokemonCard({pokemonURL}) {
 
             {
                 types?.map((type)=> 
-                    <div key={type} className='mx-auto'>
+                    <div key={type + '1'} className='mx-auto'>
                         {         
                         types.length === 1 ?        
                             <div className={`${typeBackGround[type]} w-[80px] mx-auto rounded-xl`}>

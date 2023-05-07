@@ -39,7 +39,7 @@ function Home() {
 
                     <form  className='pt-[20px]' onSubmit={handleSubmit}>
                         <div className='flex relative w-[240px] ml-[-20px]'>
-                            <input id='nameTrainer' placeholder='Your name' className=' border-[1px] border-black border-r-0 w-[240px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px] ' />
+                            <input id='nameTrainer' placeholder='Your name' className=' border-[1px] border-black border-r-0 w-[240px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px]  outline-none ' />
 
                             <button className='flex  border-[1px] border-l-0 border-black  bg-red-600 right-0'><i className='bx bx-search-alt text-[25px] text-white mx-auto'></i></button>
                         </div>

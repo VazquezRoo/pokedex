@@ -7,17 +7,8 @@ function ImgPokeEvolution({url,next,previous,evolution}) {
 const [img, setImg] = useState([])
 const [id, setId] = useState()
 
-// console.log(url)
-// console.log( url.replace('-species',''))s
-
-
-
-
-
-
     useEffect(()=>{
       if(url){
-        console.log(url)
         axios
         .get(url.replace('-species',''))
         .then(res => {
@@ -26,7 +17,6 @@ const [id, setId] = useState()
         }
           )
         .catch(err=> console.log(err))
-        console.log(img)
       }
     },[url,next,previous,evolution])
 

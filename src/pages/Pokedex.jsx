@@ -118,7 +118,6 @@ function Pokedex() {
                 .catch(err=>console.log(err))
                 .finally(()=>setLoader(false))         //Desactiva el Loader
                
-                console.log(pokemons)
             }
 
             
@@ -153,7 +152,6 @@ function Pokedex() {
                                
                 .catch(err=>console.log(err))
                 .finally(()=>setLoader(false))      //Desactivo Loader
-                console.log(pokemons)
             }
 
         },[currentGeneration]) //efecto al cambiar la generacion
@@ -223,15 +221,6 @@ function Pokedex() {
     const inputType = useRef(null)
 
 
-    // useEffect(()=>{
-        
-    //     inputName.current.value = ''
-    // },[currentType,currentGeneration])
-
-    // useEffect(()=>{
-    //     inputType.current.value = ''
-    // },[currentGeneration])
-
   return (
       <>
       {/* Loader */}
@@ -267,7 +256,7 @@ function Pokedex() {
                     {/* Input y button */}
 
                 <div className='flex relative w-[260px] ml-[-20px]'>
-                    <input ref={inputName}  id='pokemonName' placeholder='Search your pokemon' className=' border-[1px] border-black border-r-0 w-[260px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px] '/>
+                    <input ref={inputName}  id='pokemonName' placeholder='Search your pokemon' className=' border-[1px] border-black border-r-0 w-[260px] h-[30px] font-[20px] text-center drop-shadow-lg text-[20px]  outline-none '/>
 
                     <button  className='flex w-[50px] border-[1px] border-l-0 border-black  bg-red-600 right-0'><i className='bx bx-search-alt text-[25px] text-white mx-auto'></i></button>
                 </div>
@@ -279,7 +268,7 @@ function Pokedex() {
                     <option  value="">All</option>
                     {
                         types.map(type=>(
-                            <option value={type} key={type}>{type}</option>
+                            <option value={type} key={type} >{type}</option>
                         ))
                     }
                 </select>
@@ -338,6 +327,7 @@ function Pokedex() {
 
             {
             pokemonsByName?.slice(startCut, endCut).map(pokemon=>
+                
             <PokemonCard key={pokemon.url} pokemonURL = {pokemon.url} />
              )
             }

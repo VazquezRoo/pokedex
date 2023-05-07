@@ -4,7 +4,7 @@ function Loader() {
 
   return (
     
-    <div className=" bg-black z-50 absolute min-h-screen left-0 w-screen">
+    <div className=" bg-white z-50 absolute h-screen left-0 w-screen">
 
 
     </div>
