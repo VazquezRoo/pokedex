@@ -250,7 +250,7 @@ function Pokedex() {
 
             {/* Form para Input,button y type search */}
 
-            <form onSubmit={handleSubmit} action="" className=' justify-self-center flex flex-col min-[700px]:flex-row min-[700px]:gap-[80px] justify-between p-6 gap-4'>
+            <form  onSubmit={handleSubmit} action="" className=' justify-self-center flex flex-col min-[700px]:flex-row min-[700px]:gap-[80px] justify-between p-6 gap-4'>
 
 
                     {/* Input y button */}

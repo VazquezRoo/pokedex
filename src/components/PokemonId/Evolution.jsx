@@ -65,7 +65,7 @@ function Evolution({evolution, next, previous}) {
 
          <div className='grid  justify-center items-center justify-items-center'>
 
-            <ImgPokeEvolution  id='pokeUno'htmlFor='pokeUno'  url={evolutionPoke?.url} next={next} previous={previous} evolution={evolution}  className={``}/>     
+            <ImgPokeEvolution  id='pokeUno'htmlFor='pokeUno'  url={evolutionPoke?.url} next={next} previous={previous} evolution={evolution} />     
             <p className='text-center text-[15px] min-[600px]:text-[20px] self-end' >{evolutionPoke?.name[0].toUpperCase() + (evolutionPoke?.name).substring(1)}</p>
 
          </div>

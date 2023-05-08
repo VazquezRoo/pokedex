@@ -36,7 +36,7 @@ function Header() {
 
           {/* boton Logout */}
           <abbr onClick={logOut} title='Log out' className='text-black/50 z-50 hover:text-[35px] hover:ml-[6px] hover:text-red-600 absolute mt-[8px] text-[30px] ml-[8px] cursor-pointer'>
-              <i class='bx bx-log-out-circle'></i>
+              <i className='bx bx-log-out-circle'></i>
           </abbr>
         </div>
         

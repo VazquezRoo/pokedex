@@ -109,7 +109,7 @@ function PokemonCard({pokemonURL}) {
         .catch(err=> console.log(err))
         .finally(()=>setLoader(false)) 
         
-        
+         
     },[])
 
     
@@ -138,7 +138,7 @@ function PokemonCard({pokemonURL}) {
             loader && <LoaderCard/>
         }
 
-    <Link id='padreImgPokemon' to= {`/pokedex/${pokemon?.id}`} className={`text-center border-8  ${borderByType[pokemon?.types[0].type.name]} ${backgroundByType[pokemon?.types[0].type.name]} rounded-[80px] w-[280px] bg-slate-800/90 ${numberPokedex > 1010 && 'opacity-100 invisible absolute'} hover:opacity-80`}>
+    <Link  id='padreImgPokemon' to= {`/pokedex/${pokemon?.id}`} className={`text-center border-8  ${borderByType[pokemon?.types[0].type.name]} ${backgroundByType[pokemon?.types[0].type.name]} rounded-[80px] w-[280px] bg-slate-800/90 ${numberPokedex > 1010 && 'opacity-100 invisible absolute'} hover:opacity-80`}>
 
         {/* seccion superior */}
 
