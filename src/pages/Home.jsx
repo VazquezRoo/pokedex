@@ -33,7 +33,7 @@ function Home() {
 
                 <div className=' grid justify-items-center'>
                     <h2 className='text-red-800 min-[600px]:text-[30px]'>Hello trainer</h2>
-                    <p className='text-green-800 min-[600px]:text-[30px]'>Give me your name start!</p>
+                    <p className='text-green-800 min-[600px]:text-[30px]'>Give me your name to start!</p>
 
                     {/* form para tomar nombre del entrenador */}
 
