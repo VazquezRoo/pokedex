@@ -237,7 +237,7 @@ function PokemonId() {
         {/* imagen con button para volver a pokedex */}
 
         <Link to= {`/pokedex/`} className='flex  justify-center'>     
-                <img src="/images/pokedex.png" alt=""  className=' h-[30px] w-[180px]'/>
+                <img src="/images/pokedex.png" alt=""  className=' h-[45px] w-[180px] min-[580px]:h-[45px]'/>
         </Link>  
 
 
