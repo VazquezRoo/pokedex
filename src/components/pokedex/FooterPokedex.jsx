@@ -5,7 +5,7 @@ function FooterPokedex() {
 
   return (
 
-  <div className={` h-[300px] bg-black text-white grid justify-center text-[12px] min-[600px]:text-[20px] mt-[20px]`}>
+  <div className={` h-[300px] bg-gradient-to-b from-red-600 to-gray-200 text-white grid justify-center text-[12px] min-[600px]:text-[20px] mt-[20px]`}>
       <div className='  max-w-[1200px] grid grid-cols-2 p-2'>
 
         <div className='flex flex-col justify-center items-start  '>
