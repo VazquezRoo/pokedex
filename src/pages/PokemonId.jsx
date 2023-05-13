@@ -19,6 +19,7 @@ function PokemonId() {
     const [previous, setPrevious] = useState(true) //estado cambiar pokemon anterior   
     const [shiny, setShiny] = useState(false) //estado cambio de imagen normal/shiny
     const [evolution, setEvolution] = useState()
+    const [listPokedex, setListPokedex] = useState([])
 
     const {id} = useParams()
 
@@ -31,7 +32,7 @@ function PokemonId() {
         .get(URL)
         .then(res => setPokedex(res.data.pokemon_entries))
         .catch(err => console.log(err))
-        
+        console.log(pokedex)
     },[])
    
     const navigate = useNavigate()
@@ -96,6 +97,7 @@ function PokemonId() {
         pokedexList[pokedex[i].entry_number.toString()] = pokedex[i].pokemon_species.name
         
     }
+    console.log(pokedexList)
     
     
     //Logica vovler 0001 los no. pokedex
@@ -254,8 +256,11 @@ function PokemonId() {
                     <i className='bx bx-left-arrow-circle text-[40px] text-white'></i>
 
                     {/* nombre y no. pokemon anterior */}
-                    <p className='text-[12px] min-[800px]:pb-6 min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6'>{pokedexList[(pokemon?.id -1).toString()][0].toUpperCase() + pokedexList[(pokemon?.id -1).toString()].substring(1)} <span className=' text-black/40 grid z-30 pt-4 min-[800px]:pt-0'>N.°{numberPreviousPokedex}</span>
-                    </p>  
+
+                    
+                        <p className='text-[12px] min-[800px]:pb-6 min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6'>{pokedexList[(pokemon?.id -1)]} <span className=' text-black/40 grid z-30 pt-4 min-[800px]:pt-0'>N.°{numberPreviousPokedex}</span>
+                        </p> 
+                    
 
                     {/* trapecio boton anterior */}
 
@@ -277,8 +282,10 @@ function PokemonId() {
                 <button  className='h-[80px] flex  w-[100%] bg-gray-500 items-center justify-between pr-2 pl-3'>
                 
                     {/* info pokemon y pokedex siguiente */}
-                    <p className='text-[12px] min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6 min-[800px]:pb-6'>{pokedexList[(pokemon?.id +1).toString()][0].toUpperCase() + pokedexList[(pokemon?.id +1).toString()].substring(1)} <span className='text-black/40 grid pt-3 z-30 min-[800px]:pt-[0] '>N.°{numberNextPokedex}</span>
-                    </p>
+                    
+                        <p className='text-[12px] min-[900px]:text-[30px] min-[400px]:text-[18px] grid min-[800px]:flex min-[800px]:gap-6 min-[800px]:pb-6'>{pokedexList[(pokemon?.id +1)]} <span className='text-black/40 grid pt-3 z-30 min-[800px]:pt-[0] '>N.°{numberNextPokedex}</span>
+                        </p>
+                    
 
                     {/* flecha boton siguiente */}
                     <i className='bx bx-right-arrow-circle  text-[40px] text-white' ></i>
